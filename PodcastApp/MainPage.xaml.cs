@@ -38,16 +38,31 @@ namespace PodcastApp
         {
             MainPageItem selectedItem = e.SelectedItem as MainPageItem;
 
+            if (selectedItem == null)
+                return;
+
             if(selectedItem.Title == "Queue")
             {
-                //Navigation.PushAsync(new QueuePage());
-                App.Current.MainPage = new QueuePage();
+                NavigationService.NavigateTo("Queue");
             }
             else if(selectedItem.Title == "Subscribed Podcasts")
             {
-                //Navigation.PushAsync(new SubscribedPodcastsPage());
-                App.Current.MainPage = new SubscribedPodcastsPage();
+                NavigationService.NavigateTo("Subscribed");
             }
+        }
+
+        protected override void OnAppearing()
+        {
+
+            if (list.SelectedItem == null)
+            {
+                base.OnAppearing();
+                return;
+            }
+
+            list.ScrollTo(list.SelectedItem, ScrollToPosition.Center, true);
+            list.SelectedItem = null;
+            base.OnAppearing();
         }
     }
 }

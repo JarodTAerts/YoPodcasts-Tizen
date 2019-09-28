@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodcastApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,12 @@ namespace PodcastApp
         {
             InitializeComponent();
 
-            MainPage = new PodcastApp.MainPage();
+            NavigationService.RegisterPage("Home", new MainPage());
+            NavigationService.RegisterPage("Queue", new QueuePage());
+            NavigationService.RegisterPage("Subscribed", new SubscribedPodcastsPage());
+
+            //MainPage = new PodcastApp.MainPage();
+            NavigationService.SetHomePage("Home");
         }
 
         protected override void OnStart()

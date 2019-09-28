@@ -16,6 +16,8 @@ namespace PodcastApp
     {
         private static readonly PocketCastsApiService pocketCastsApiService = new PocketCastsApiService();
 
+        private List<Episode> episodes = new List<Episode>();
+
         public QueuePage ()
 		{
 			InitializeComponent ();
@@ -29,9 +31,9 @@ namespace PodcastApp
             {
                 await pocketCastsApiService.Login("jarod2017@gmail.com", "Basketball#1");
 
-                List<Episode> podcasts = await pocketCastsApiService.GetQueue();
+                episodes = await pocketCastsApiService.GetQueue();
 
-                list.ItemsSource = podcasts;
+                list.ItemsSource = episodes;
             }
             catch (Exception e)
             {
@@ -42,8 +44,18 @@ namespace PodcastApp
 
         protected override bool OnBackButtonPressed()
         {
-            App.Current.MainPage = new MainPage();
+            NavigationService.GoBack();
             return true;
+        }
+
+        protected override void OnAppearing()
+        {
+            if (episodes.Count <= 0)
+                return;
+
+            list.ScrollTo(episodes[0], ScrollToPosition.Center, true);
+
+            base.OnAppearing();
         }
     }
 }

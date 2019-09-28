@@ -42,8 +42,20 @@ namespace PodcastApp
 
         protected override bool OnBackButtonPressed()
         {
-            App.Current.MainPage = new MainPage();
+            NavigationService.GoBack();
             return true;
+        }
+
+        protected override void OnAppearing()
+        {
+            if (list.SelectedItem == null)
+            {
+                base.OnAppearing();
+                return;
+            }
+
+            list.ScrollTo(list.SelectedItem, ScrollToPosition.Center, true);
+            base.OnAppearing();
         }
     }
 }
