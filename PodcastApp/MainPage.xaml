@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c:CirclePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Tizen.Wearable.CircularUI.Forms;assembly=Tizen.Wearable.CircularUI.Forms"
+             x:Class="PodcastApp.MainPage"
+             RotaryFocusObject="{x:Reference list}">
+
+    <StackLayout Padding="0, 20, 0, 0">
+        <Label HorizontalOptions="CenterAndExpand" Text="YoPodcasts" FontSize="Medium" TextColor="#2196F3"/>
+
+        <c:CircleListView x:Name="list" HasUnevenRows="True" ItemSelected="List_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="120">
+                            <StackLayout VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Small"/>
+                                <Label Text="{Binding Description}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Micro"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </c:CircleListView>
+    </StackLayout>
+</c:CirclePage>
