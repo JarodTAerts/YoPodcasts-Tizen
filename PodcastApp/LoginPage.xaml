@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c:CirclePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Tizen.Wearable.CircularUI.Forms;assembly=Tizen.Wearable.CircularUI.Forms"
+             x:Class="PodcastApp.LoginPage"
+             >
+
+
+    <c:CircleStackLayout  Padding="0, 20, 0, 10"  HorizontalOptions="CenterAndExpand">
+        <Label HorizontalOptions="CenterAndExpand" Text="Login" FontSize="Medium" TextColor="#2196F3"/>
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Entry Placeholder="Email" Text="jarod2017@gmail.com" x:Name="emailEntry" HorizontalOptions="CenterAndExpand"/>
+            <Entry Placeholder="Password" Text="Basketball#1" x:Name="passwordEntry" HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+
+        <Button Text="Login" Clicked="Button_Clicked" HorizontalOptions="CenterAndExpand" VerticalOptions="End"/>
+    </c:CircleStackLayout>
+
+</c:CirclePage>

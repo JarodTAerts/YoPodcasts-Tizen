@@ -25,8 +25,8 @@ namespace PodcastApp.Accessors
         public async Task<HttpResponseMessage> Login(string username, string password)
         {
             Dictionary<string, string> loginCreds = new Dictionary<string, string>();
-            loginCreds.Add("email", "jarod2017@gmail.com");
-            loginCreds.Add("password", "Basketball#1");
+            loginCreds.Add("email", username);
+            loginCreds.Add("password", password);
             loginCreds.Add("scope", "webplayer");
 
             StringContent loginContent = new StringContent(JsonConvert.SerializeObject(loginCreds), Encoding.Default, "application/json");

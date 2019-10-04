@@ -27,8 +27,6 @@ namespace PodcastApp
         {
             try
             {
-                await pocketCastsApiService.Login("jarod2017@gmail.com", "Basketball#1");
-
                 List<Podcast> podcasts = await pocketCastsApiService.GetSubscribedPodcasts();
 
                 list.ItemsSource = podcasts;

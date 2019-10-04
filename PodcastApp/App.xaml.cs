@@ -1,4 +1,6 @@
-﻿using PodcastApp.Services;
+﻿using Plugin.Settings;
+using PodcastApp.Models;
+using PodcastApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +15,29 @@ namespace PodcastApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class App : Application
     {
+        private static readonly PocketCastsApiService pocketCastsApiService = new PocketCastsApiService();
+
         public App()
         {
             InitializeComponent();
 
+            //LoginToService().Wait();
+
+            if(SettingsService.ApiToken == string.Empty)
+            {
+                MainPage = new LoginPage();
+                return;
+            }
+
+            SetupNavigation();
+        }
+
+        public static void SetupNavigation()
+        {
             NavigationService.RegisterPage("Home", new MainPage());
             NavigationService.RegisterPage("Queue", new QueuePage());
             NavigationService.RegisterPage("Subscribed", new SubscribedPodcastsPage());
 
-            //MainPage = new PodcastApp.MainPage();
             NavigationService.SetHomePage("Home");
         }
 

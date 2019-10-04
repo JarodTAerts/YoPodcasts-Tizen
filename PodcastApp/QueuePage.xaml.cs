@@ -29,8 +29,6 @@ namespace PodcastApp
         {
             try
             {
-                await pocketCastsApiService.Login("jarod2017@gmail.com", "Basketball#1");
-
                 episodes = await pocketCastsApiService.GetQueue();
 
                 list.ItemsSource = episodes;

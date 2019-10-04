@@ -17,6 +17,17 @@ namespace PodcastApp.Services
 
         private static string authToken = "";
 
+        public PocketCastsApiService()
+        {
+            if (authToken != "")
+                return;
+
+            if(SettingsService.ApiToken != "")
+            {
+                authToken = SettingsService.ApiToken;
+            }
+        }
+
         #region Interface Functions
         /// <summary>
         /// Function to login to the Pocket Casts Api and get and auth token we can use for later actions
@@ -24,13 +35,15 @@ namespace PodcastApp.Services
         /// <param name="username">Username of the person to login</param>
         /// <param name="password">Password of the person to login</param>
         /// <returns>Nothing</returns>
-        public async Task Login(string username, string password)
+        public async Task<string> Login(string username, string password)
         {
             HttpResponseMessage loginResponseMessage = await pocketCastsApiAccessor.Login(username, password);
 
             AuthResponse loginResponse = JsonConvert.DeserializeObject<AuthResponse>(await loginResponseMessage.Content.ReadAsStringAsync());
 
             authToken = loginResponse.Token;
+
+            return authToken;
         }
 
         /// <summary>
