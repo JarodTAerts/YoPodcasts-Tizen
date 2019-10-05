@@ -25,7 +25,7 @@ namespace PodcastApp.Services
             set
             {
                 string jsonText = JsonConvert.SerializeObject(value);
-                Preference.Set("SubscribedPodcasts", value);
+                Preference.Set("SubscribedPodcasts", jsonText);
             }
         }
 
@@ -44,6 +44,24 @@ namespace PodcastApp.Services
             {
                 string jsonText = JsonConvert.SerializeObject(value);
                 Preference.Set("Queue", jsonText);
+            }
+        }
+
+        public static List<Episode> DownloadQueue
+        {
+            get
+            {
+                if (Preference.Contains("DownloadQueue"))
+                {
+                    return JsonConvert.DeserializeObject<List<Episode>>(Preference.Get<string>("DownloadQueue"));
+                }
+
+                return null;
+            }
+            set
+            {
+                string jsonText = JsonConvert.SerializeObject(value);
+                Preference.Set("DownloadQueue", jsonText);
             }
         }
 
@@ -81,5 +99,24 @@ namespace PodcastApp.Services
                 Preference.Set("CurrentUser", jsonText);
             }
         }
+
+        public static Episode PlayingEpisode
+        {
+            get
+            {
+                if (Preference.Contains("PlayingEpisode"))
+                {
+                    return JsonConvert.DeserializeObject<Episode>(Preference.Get<string>("PlayingEpisode"));
+                }
+
+                return null;
+            }
+            set
+            {
+                string jsonText = JsonConvert.SerializeObject(value);
+                Preference.Set("PlayingEpisode", jsonText);
+            }
+        }
+
     }
 }

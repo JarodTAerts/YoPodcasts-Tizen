@@ -30,11 +30,15 @@ namespace PodcastApp
                 List<Podcast> podcasts = await pocketCastsApiService.GetSubscribedPodcasts();
 
                 list.ItemsSource = podcasts;
+
+                SettingsService.SubscribedPodcasts = podcasts;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                int i = 88;
+                list.ItemsSource = SettingsService.SubscribedPodcasts;
+
+                if (list.ItemsSource == null)
+                    list.ItemsSource = new List<Podcast> { new Podcast { Title = "No connection and no local data" }, new Podcast { Title = e.Message } };
             }
         }
 

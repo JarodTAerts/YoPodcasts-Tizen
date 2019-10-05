@@ -32,11 +32,15 @@ namespace PodcastApp
                 episodes = await pocketCastsApiService.GetQueue();
 
                 list.ItemsSource = episodes;
+
+                SettingsService.Queue = episodes;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                int i = 88;
+                list.ItemsSource = SettingsService.Queue;
+
+                if (list.ItemsSource == null)
+                    list.ItemsSource = new List<Episode> { new Episode { Title = "No connection and no local data" } };
             }
         }
 
@@ -54,6 +58,14 @@ namespace PodcastApp
             list.ScrollTo(episodes[0], ScrollToPosition.Center, true);
 
             base.OnAppearing();
+        }
+
+        private void List_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Episode selectedEpisode = e.SelectedItem as Episode;
+            DownloadService.AddToQueue(selectedEpisode, head);
+
+            //selectedEpisode.Title = "Added to Queue!";
         }
     }
 }

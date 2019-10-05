@@ -1,4 +1,5 @@
-﻿using Plugin.Settings;
+﻿using Plugin.Connectivity;
+using Plugin.Settings;
 using PodcastApp.Models;
 using PodcastApp.Services;
 using System;
@@ -17,11 +18,20 @@ namespace PodcastApp
     {
         private static readonly PocketCastsApiService pocketCastsApiService = new PocketCastsApiService();
 
+        public static Episode PlayingEpisode;
+
+        public static List<Episode> Queue;
+
+        public static List<Podcast> SubscribedPodcasts;
+
         public App()
         {
             InitializeComponent();
 
-            //LoginToService().Wait();
+            SetupAppProperties();
+
+            DownloadService.CheckForDownloads();
+            DownloadService.Start();
 
             if(SettingsService.ApiToken == string.Empty)
             {
@@ -39,6 +49,32 @@ namespace PodcastApp
             NavigationService.RegisterPage("Subscribed", new SubscribedPodcastsPage());
 
             NavigationService.SetHomePage("Home");
+        }
+
+        private static void SetupAppProperties()
+        {
+            if(SettingsService.PlayingEpisode != null)
+            {
+                PlayingEpisode = SettingsService.PlayingEpisode;
+            }
+
+            if(SettingsService.Queue != null)
+            {
+                Queue = SettingsService.Queue;
+            }
+
+            if(SettingsService.SubscribedPodcasts != null)
+            {
+                SubscribedPodcasts = SettingsService.SubscribedPodcasts;
+            }
+        }
+
+        public static async Task<bool> CheckConnection()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+                return false;
+            else
+                return true;
         }
 
         protected override void OnStart()

@@ -7,10 +7,10 @@
     <c:CirclePage.Content>
         <StackLayout  Padding="0, 20, 0, 0">
 
-            <Label HorizontalOptions="CenterAndExpand" Text="Queue" FontSize="Medium" TextColor="#2196F3"/>
+            <Label x:Name="head" HorizontalOptions="CenterAndExpand" Text="Queue" FontSize="Medium" TextColor="#2196F3"/>
 
             <c:CircleListView x:Name="list" HorizontalOptions="CenterAndExpand" VerticalOptions="End"
-                              WidthRequest="300" MinimumWidthRequest="250" HasUnevenRows="True">
+                              WidthRequest="300" MinimumWidthRequest="250" HasUnevenRows="True" ItemSelected="List_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="120">

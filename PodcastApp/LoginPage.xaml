@@ -11,7 +11,7 @@
 
         <StackLayout VerticalOptions="CenterAndExpand">
             <Entry Placeholder="Email" Text="jarod2017@gmail.com" x:Name="emailEntry" HorizontalOptions="CenterAndExpand"/>
-            <Entry Placeholder="Password" Text="Basketball#1" x:Name="passwordEntry" HorizontalOptions="CenterAndExpand"/>
+            <Entry Placeholder="Password" Text="Basketball#1" IsPassword="True" x:Name="passwordEntry" HorizontalOptions="CenterAndExpand"/>
         </StackLayout>
 
         <Button Text="Login" Clicked="Button_Clicked" HorizontalOptions="CenterAndExpand" VerticalOptions="End"/>
