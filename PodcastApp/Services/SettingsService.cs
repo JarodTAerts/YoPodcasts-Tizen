@@ -65,6 +65,24 @@ namespace PodcastApp.Services
             }
         }
 
+        public static List<Episode> DownloadedEpisodes
+        {
+            get
+            {
+                if (Preference.Contains("DownloadedEpisodes"))
+                {
+                    return JsonConvert.DeserializeObject<List<Episode>>(Preference.Get<string>("DownloadedEpisodes"));
+                }
+
+                return null;
+            }
+            set
+            {
+                string jsonText = JsonConvert.SerializeObject(value);
+                Preference.Set("DownloadedEpisodes", jsonText);
+            }
+        }
+
         public static string ApiToken
         {
             get

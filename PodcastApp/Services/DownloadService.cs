@@ -27,7 +27,7 @@ namespace PodcastApp.Services
 
         public static void CheckForDownloads()
         {
-            if (SettingsService.DownloadQueue != null)
+            if (SettingsService.DownloadQueue != null && SettingsService.DownloadQueue.Count > 0)
                 downloadQueue = SettingsService.DownloadQueue;
         }
 
@@ -36,6 +36,7 @@ namespace PodcastApp.Services
             lock (queueLock)
             {
                 downloadQueue.Add(episode);
+                SettingsService.DownloadQueue.Add(episode);
             }
         }
 
@@ -65,6 +66,8 @@ namespace PodcastApp.Services
                         lock (queueLock)
                         {
                             downloadQueue.Remove(episode);
+                            SettingsService.DownloadQueue.Remove(episode);
+                            SettingsService.DownloadedEpisodes.Add(episode);
                         }
                     }
                     catch(Exception e)

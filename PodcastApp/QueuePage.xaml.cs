@@ -63,9 +63,7 @@ namespace PodcastApp
         private void List_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Episode selectedEpisode = e.SelectedItem as Episode;
-            DownloadService.AddToQueue(selectedEpisode, head);
-
-            //selectedEpisode.Title = "Added to Queue!";
+            DownloadService.AddToQueue(selectedEpisode);
         }
     }
 }
